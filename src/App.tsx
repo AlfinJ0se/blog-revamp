@@ -11,7 +11,7 @@ function App() {
   return (
     <BlogProvider>
       <Router>
-        <div className="min-h-screen matrix-bg">
+        <div className="min-h-screen professional-bg">
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />

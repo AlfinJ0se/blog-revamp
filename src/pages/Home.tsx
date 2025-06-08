@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Calendar, User, Zap, Code2, Database } from 'lucide-react';
+import { ArrowRight, Calendar, User, Sparkles } from 'lucide-react';
 import { useBlog } from '../context/BlogContext';
 import { formatDate } from '../utils/dateUtils';
 
@@ -22,17 +22,16 @@ const Home: React.FC = () => {
 
   return (
     <div className="pt-20">
-      {/* Hero Section with Cyberpunk Effects */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background Elements */}
         <motion.div
           style={{ y: y1, opacity }}
           className="absolute inset-0 z-0"
         >
-          <div className="absolute inset-0 cyber-grid opacity-20" />
-          <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-500/20 rounded-full blur-xl animate-float" />
-          <div className="absolute bottom-40 right-20 w-48 h-48 bg-pink-500/20 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-yellow-500/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute inset-0 subtle-grid opacity-30" />
+          <div className="absolute top-20 left-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-xl animate-float" />
+          <div className="absolute bottom-40 right-20 w-48 h-48 bg-purple-500/10 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
         </motion.div>
 
         <motion.div
@@ -47,21 +46,22 @@ const Home: React.FC = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-8"
           >
-            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-full border border-cyan-500/30 mb-6">
-              <Zap className="w-4 h-4 text-cyan-400" />
-              <span className="text-cyan-400 text-sm cyber-text">SYSTEM ONLINE</span>
+            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/30 mb-6">
+              <Sparkles className="w-4 h-4 text-indigo-400" />
+              <span className="text-indigo-400 text-sm font-medium">Welcome to my digital space</span>
             </div>
           </motion.div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 cyber-text">
-            <span className="block gradient-text-alt neon-pulse">CYBER</span>
-            <span className="block gradient-text">CHRONICLES</span>
+          <h1 className="text-6xl md:text-8xl font-bold mb-8">
+            <span className="block text-white">Modern</span>
+            <span className="block gradient-text-alt">Insights</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
-            Diving deep into the digital realm where{' '}
-            <span className="text-cyan-400 cyber-text">code meets creativity</span> and{' '}
-            <span className="text-pink-400 cyber-text">innovation shapes reality</span>
+            Exploring the intersection of{' '}
+            <span className="text-indigo-400 font-medium">technology</span>,{' '}
+            <span className="text-purple-400 font-medium">design</span>, and{' '}
+            <span className="text-cyan-400 font-medium">innovation</span>
           </p>
 
           <motion.div
@@ -71,45 +71,12 @@ const Home: React.FC = () => {
           >
             <Link
               to="/posts"
-              className="cyber-button inline-flex items-center px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 group cyber-text"
+              className="professional-button inline-flex items-center px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 group"
             >
-              <Code2 className="w-5 h-5 mr-2" />
-              ENTER THE MATRIX
+              Explore Articles
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
-        </motion.div>
-
-        {/* Floating Icons */}
-        <motion.div
-          animate={{ 
-            y: [0, -20, 0],
-            rotate: [0, 5, -5, 0]
-          }}
-          transition={{ 
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/4 left-1/4 text-cyan-400/30"
-        >
-          <Database className="w-12 h-12" />
-        </motion.div>
-        
-        <motion.div
-          animate={{ 
-            y: [0, 20, 0],
-            rotate: [0, -5, 5, 0]
-          }}
-          transition={{ 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-          className="absolute bottom-1/4 right-1/4 text-pink-400/30"
-        >
-          <Code2 className="w-16 h-16" />
         </motion.div>
       </section>
 
@@ -125,11 +92,11 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 cyber-text gradient-text">
-              FEATURED LOGS
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+              Featured Articles
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Latest transmissions from the digital frontier
+              Latest insights and discoveries from the world of technology
             </p>
           </motion.div>
 
@@ -144,19 +111,19 @@ const Home: React.FC = () => {
                 className="group"
               >
                 <Link to={`/posts/${post.slug}`}>
-                  <div className="cyber-card rounded-xl overflow-hidden h-full">
-                    <div className="h-48 bg-gradient-to-br from-cyan-600/20 via-pink-600/20 to-yellow-600/20 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 cyber-grid opacity-30"></div>
-                      <div className="text-6xl opacity-40 relative z-10">⚡</div>
+                  <div className="professional-card rounded-xl overflow-hidden h-full">
+                    <div className="h-48 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-cyan-600/20 flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 subtle-grid opacity-20"></div>
+                      <div className="text-6xl opacity-30 relative z-10">📝</div>
                       <div className="absolute top-4 right-4 z-20">
-                        <span className="px-3 py-1 bg-gradient-to-r from-cyan-500 to-pink-500 text-white text-xs font-bold rounded-full cyber-text">
-                          {post.category.toUpperCase()}
+                        <span className="px-3 py-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs font-semibold rounded-full">
+                          {post.category}
                         </span>
                       </div>
                     </div>
                     
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors line-clamp-2 cyber-text">
+                      <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors line-clamp-2">
                         {post.title}
                       </h3>
                       
@@ -167,16 +134,16 @@ const Home: React.FC = () => {
                       <div className="flex items-center justify-between text-sm text-gray-500">
                         <div className="flex items-center space-x-4">
                           <div className="flex items-center space-x-1">
-                            <Calendar className="w-4 h-4 text-cyan-400" />
+                            <Calendar className="w-4 h-4 text-indigo-400" />
                             <span>{formatDate(post.date)}</span>
                           </div>
                           <div className="flex items-center space-x-1">
-                            <User className="w-4 h-4 text-pink-400" />
+                            <User className="w-4 h-4 text-purple-400" />
                             <span>{post.author}</span>
                           </div>
                         </div>
                         
-                        <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
                   </div>
@@ -193,9 +160,9 @@ const Home: React.FC = () => {
           >
             <Link
               to="/posts"
-              className="cyber-button inline-flex items-center px-6 py-3 rounded-lg transition-all duration-300 group cyber-text"
+              className="inline-flex items-center px-6 py-3 text-indigo-400 border border-indigo-400/50 rounded-lg hover:bg-indigo-400/10 transition-all duration-300 group"
             >
-              ACCESS ALL LOGS
+              View All Articles
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
