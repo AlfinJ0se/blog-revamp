@@ -10,18 +10,47 @@ const __dirname = path.dirname(__filename);
 const POSTS_DIR = path.join(__dirname, '../posts');
 const OUTPUT_FILE = path.join(__dirname, '../src/data/posts.json');
 
-function generateExcerpt(content) {
+function splitContentAtMore(content) {
+  const moreTag = '<!--more-->';
+  const moreIndex = content.indexOf(moreTag);
+  
+  if (moreIndex === -1) {
+    // No <!--more--> tag found, use first paragraph as excerpt
+    const firstParagraph = content.split('\n\n')[0];
+    return {
+      excerpt: generateExcerptFromText(firstParagraph),
+      mainContent: content
+    };
+  }
+  
+  const beforeMore = content.substring(0, moreIndex).trim();
+  const afterMore = content.substring(moreIndex + moreTag.length).trim();
+  
+  return {
+    excerpt: generateExcerptFromText(beforeMore),
+    mainContent: afterMore
+  };
+}
+
+function generateExcerptFromText(content) {
   // Remove markdown syntax for a cleaner excerpt
-  const cleanContent = content
+  let cleanContent = content
+    .replace(/^\*\*tl;dr\*\*\s*/i, '') // Remove "tl;dr" at the beginning
+    .replace(/^tl;dr\s*/i, '') // Remove plain "tl;dr" at the beginning
     .replace(/#{1,6}\s+/g, '') // Remove headers
-    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
-    .replace(/\*(.*?)\*/g, '$1') // Remove italic
-    .replace(/`(.*?)`/g, '$1') // Remove inline code
+    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold markdown, keep text
+    .replace(/\*(.*?)\*/g, '$1') // Remove italic markdown, keep text
+    .replace(/`(.*?)`/g, '$1') // Remove inline code markdown, keep text
     .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links, keep text
     .replace(/!\[.*?\]\(.*?\)/g, '') // Remove images
     .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+    .replace(/^\s*[\*\+\-]\s+/gm, '') // Remove bullet points
+    .replace(/^\s*\d+\.\s+/gm, '') // Remove numbered lists
     .replace(/\n+/g, ' ') // Replace newlines with spaces
     .trim();
+
+  // Clean up extra spaces
+  cleanContent = cleanContent.replace(/\s+/g, ' ').trim();
 
   // Get first 150 characters, ending at word boundary
   if (cleanContent.length <= 150) {
@@ -85,16 +114,16 @@ function parseMarkdownFile(filename, fileContent) {
   }
 
   const frontmatter = parsed.data;
-  const content = parsed.content;
+  const rawContent = parsed.content;
 
   // Generate slug from filename
   const slug = filename.replace('.md', '');
 
-  // Generate excerpt from content
-  const excerpt = generateExcerpt(content);
+  // Split content at <!--more--> tag
+  const { excerpt, mainContent } = splitContentAtMore(rawContent);
 
-  // Calculate read time based on word count
-  const readTime = calculateReadTime(content);
+  // Calculate read time based on main content word count
+  const readTime = calculateReadTime(mainContent);
 
   // Extract category from tags or use default
   const category = frontmatter.tags && frontmatter.tags.length > 0 
@@ -105,7 +134,7 @@ function parseMarkdownFile(filename, fileContent) {
     slug,
     title: frontmatter.title || 'Untitled',
     excerpt,
-    content,
+    content: mainContent, // Only the content after <!--more-->
     date: formatDate(frontmatter.date || new Date().toISOString()),
     author: 'Alfin Joseph', // Default author
     category,

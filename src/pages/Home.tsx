@@ -123,13 +123,9 @@ const Home: React.FC = () => {
                     </div>
                     
                     <div className="p-6">
-                      <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors line-clamp-2">
+                      <h3 className="text-xl font-semibold text-white mb-6 group-hover:text-indigo-400 transition-colors line-clamp-2">
                         {post.title}
                       </h3>
-                      
-                      <p className="text-gray-400 mb-4 line-clamp-3 leading-relaxed">
-                        {post.excerpt}
-                      </p>
                       
                       <div className="flex items-center justify-between text-sm text-gray-500">
                         <div className="flex items-center space-x-4">

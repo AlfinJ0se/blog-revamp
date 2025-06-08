@@ -97,13 +97,9 @@ const PostDetail: React.FC = () => {
             </button>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
             {post.title}
           </h1>
-          
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            {post.excerpt}
-          </p>
           
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400">
             <div className="flex items-center space-x-2">
@@ -155,12 +151,9 @@ const PostDetail: React.FC = () => {
                   className="group block"
                 >
                   <div className="professional-card rounded-xl p-6">
-                    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-indigo-400 transition-colors">
+                    <h3 className="text-lg font-semibold text-white mb-4 group-hover:text-indigo-400 transition-colors">
                       {relatedPost.title}
                     </h3>
-                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-                      {relatedPost.excerpt}
-                    </p>
                     <div className="flex items-center text-xs text-gray-500">
                       <Calendar className="w-3 h-3 mr-1" />
                       {formatDate(relatedPost.date)}
