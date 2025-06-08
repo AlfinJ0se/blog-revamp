@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, BookOpen } from 'lucide-react';
+import { Menu, X, Terminal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-900/90 backdrop-blur-md border-b border-slate-700/50'
+          ? 'bg-gray-900/95 backdrop-blur-md border-b border-cyan-500/30'
           : 'bg-transparent'
       }`}
     >
@@ -36,11 +36,14 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="flex items-center space-x-2 text-white hover:text-purple-400 transition-colors"
+            className="flex items-center space-x-3 text-cyan-400 hover:text-cyan-300 transition-colors group"
           >
-            <BookOpen className="w-8 h-8" />
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Aesthetic Blog
+            <div className="relative">
+              <Terminal className="w-8 h-8 group-hover:animate-pulse" />
+              <div className="absolute inset-0 w-8 h-8 bg-cyan-400/20 rounded-full blur-md group-hover:bg-cyan-400/40 transition-all"></div>
+            </div>
+            <span className="text-xl font-bold cyber-text gradient-text">
+              CYBER.BLOG
             </span>
           </Link>
 
@@ -50,19 +53,20 @@ const Header: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cyber-text ${
                   location.pathname === item.path
-                    ? 'text-purple-400'
-                    : 'text-gray-300 hover:text-white'
+                    ? 'text-cyan-400 neon-pulse'
+                    : 'text-gray-300 hover:text-cyan-400'
                 }`}
               >
                 {item.label}
                 {location.pathname === item.path && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-pink-500"
                   />
                 )}
+                <div className="absolute inset-0 bg-cyan-400/10 rounded opacity-0 hover:opacity-100 transition-opacity -z-10"></div>
               </Link>
             ))}
           </div>
@@ -70,7 +74,7 @@ const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white hover:text-purple-400 transition-colors"
+            className="md:hidden text-cyan-400 hover:text-cyan-300 transition-colors p-2 rounded-lg hover:bg-cyan-400/10"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -83,21 +87,27 @@ const Header: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 border-t border-slate-700/50 pt-4"
+              className="md:hidden mt-4 border-t border-cyan-500/30 pt-4"
             >
-              {navItems.map((item) => (
-                <Link
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-4 py-2 text-sm font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-purple-400'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg cyber-text ${
+                      location.pathname === item.path
+                        ? 'text-cyan-400 bg-cyan-400/10'
+                        : 'text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           )}

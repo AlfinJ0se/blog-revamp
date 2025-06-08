@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Coffee, Heart, Lightbulb, Github, Twitter, Mail } from 'lucide-react';
+import { Code, Coffee, Heart, Lightbulb, Github, Twitter, Mail, Zap, Terminal, Database } from 'lucide-react';
 
 const About: React.FC = () => {
   const skills = [
-    { name: 'React', level: 90 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Node.js', level: 80 },
-    { name: 'Design', level: 75 },
+    { name: 'React', level: 90, color: 'cyan' },
+    { name: 'TypeScript', level: 85, color: 'pink' },
+    { name: 'Node.js', level: 80, color: 'yellow' },
+    { name: 'Design', level: 75, color: 'green' },
   ];
 
   const containerVariants = {
@@ -27,25 +27,33 @@ const About: React.FC = () => {
 
   return (
     <div className="pt-32 pb-20 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="text-center mb-16"
         >
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-full border border-cyan-500/30 mb-6"
+          >
+            <Zap className="w-4 h-4 text-cyan-400" />
+            <span className="text-cyan-400 text-sm cyber-text">USER PROFILE</span>
+          </motion.div>
+          
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent"
+            className="text-6xl md:text-7xl font-bold mb-6 cyber-text gradient-text-alt"
           >
-            About Me
+            ABOUT.EXE
           </motion.h1>
           
           <motion.p
             variants={itemVariants}
-            className="text-xl text-gray-300 max-w-2xl mx-auto"
+            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            Passionate developer, creative thinker, and lifelong learner on a mission to build beautiful digital experiences
+            Digital architect, code craftsman, and cybernetic explorer navigating the infinite possibilities of the digital realm
           </motion.p>
         </motion.div>
 
@@ -58,23 +66,24 @@ const About: React.FC = () => {
             className="space-y-6"
           >
             <div className="relative">
-              <div className="w-48 h-48 mx-auto lg:mx-0 bg-gradient-to-br from-purple-600 to-cyan-600 rounded-full flex items-center justify-center text-8xl">
-                👨‍💻
+              <div className="w-64 h-64 mx-auto lg:mx-0 bg-gradient-to-br from-cyan-600 via-pink-600 to-yellow-600 rounded-full flex items-center justify-center text-8xl relative overflow-hidden">
+                <div className="absolute inset-0 cyber-grid opacity-30"></div>
+                <span className="relative z-10">🤖</span>
               </div>
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full flex items-center justify-center border border-cyan-400"
               >
-                <Code className="w-8 h-8 text-white" />
+                <Terminal className="w-8 h-8 text-white" />
               </motion.div>
             </div>
 
             <div className="text-center lg:text-left">
-              <h2 className="text-3xl font-bold text-white mb-4">John Developer</h2>
+              <h2 className="text-4xl font-bold text-white mb-4 cyber-text gradient-text">ALFIN.JOSEPH</h2>
               <p className="text-gray-300 leading-relaxed">
-                I'm a full-stack developer with a passion for creating beautiful, functional, and user-friendly applications. 
-                When I'm not coding, you'll find me exploring new technologies, contributing to open source, or enjoying a good cup of coffee.
+                A digital nomad traversing the cybernetic landscape, crafting elegant solutions and pushing the boundaries of what's possible. 
+                When not immersed in code, you'll find me exploring emerging technologies, contributing to the open-source collective, or fueling up with premium caffeine.
               </p>
             </div>
           </motion.div>
@@ -86,28 +95,30 @@ const About: React.FC = () => {
             transition={{ delay: 0.5 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-white mb-6">What Drives Me</h3>
+            <h3 className="text-3xl font-bold text-white mb-6 cyber-text gradient-text">CORE PROTOCOLS</h3>
             
             <div className="space-y-4">
               {[
-                { icon: Code, title: 'Clean Code', desc: 'Writing maintainable, elegant solutions' },
-                { icon: Lightbulb, title: 'Innovation', desc: 'Exploring new ideas and technologies' },
-                { icon: Heart, title: 'User Experience', desc: 'Creating delightful interactions' },
-                { icon: Coffee, title: 'Continuous Learning', desc: 'Always growing and improving' },
+                { icon: Code, title: 'Clean Architecture', desc: 'Building maintainable, scalable systems', color: 'cyan' },
+                { icon: Lightbulb, title: 'Innovation Drive', desc: 'Exploring cutting-edge technologies', color: 'pink' },
+                { icon: Heart, title: 'User-Centric', desc: 'Creating meaningful digital experiences', color: 'yellow' },
+                { icon: Coffee, title: 'Continuous Evolution', desc: 'Always learning, always growing', color: 'green' },
               ].map((item, index) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.7 + index * 0.1 }}
-                  className="flex items-start space-x-4 p-4 rounded-lg bg-slate-800/30 backdrop-blur-sm border border-slate-700/30 hover:border-purple-500/30 transition-colors"
+                  className="cyber-card p-4 rounded-lg group"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg flex items-center justify-center">
-                    <item.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold mb-1">{item.title}</h4>
-                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                  <div className="flex items-start space-x-4">
+                    <div className={`flex-shrink-0 w-12 h-12 bg-gradient-to-r from-${item.color}-600 to-${item.color}-400 rounded-lg flex items-center justify-center`}>
+                      <item.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold mb-1 cyber-text">{item.title}</h4>
+                      <p className="text-gray-400 text-sm">{item.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -122,7 +133,7 @@ const About: React.FC = () => {
           transition={{ delay: 0.8 }}
           className="mb-16"
         >
-          <h3 className="text-3xl font-bold text-center text-white mb-8">Skills & Expertise</h3>
+          <h3 className="text-4xl font-bold text-center text-white mb-8 cyber-text gradient-text">SKILL MATRIX</h3>
           
           <div className="grid md:grid-cols-2 gap-6">
             {skills.map((skill, index) => (
@@ -131,18 +142,18 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1 + index * 0.1 }}
-                className="space-y-2"
+                className="cyber-card p-6 rounded-lg"
               >
-                <div className="flex justify-between items-center">
-                  <span className="text-white font-medium">{skill.name}</span>
-                  <span className="text-purple-400">{skill.level}%</span>
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-white font-bold cyber-text">{skill.name}</span>
+                  <span className={`text-${skill.color}-400 font-bold cyber-text`}>{skill.level}%</span>
                 </div>
-                <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-3 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.level}%` }}
                     transition={{ delay: 1.2 + index * 0.1, duration: 1 }}
-                    className="h-full bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full"
+                    className={`h-full bg-gradient-to-r from-${skill.color}-600 to-${skill.color}-400 rounded-full`}
                   />
                 </div>
               </motion.div>
@@ -155,27 +166,27 @@ const About: React.FC = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
-          className="text-center bg-slate-800/30 backdrop-blur-sm border border-slate-700/30 rounded-2xl p-8"
+          className="text-center cyber-card rounded-2xl p-8"
         >
-          <h3 className="text-2xl font-bold text-white mb-4">Let's Connect</h3>
-          <p className="text-gray-300 mb-6">
-            I'm always open to interesting conversations and collaboration opportunities
+          <h3 className="text-3xl font-bold text-white mb-4 cyber-text gradient-text">ESTABLISH CONNECTION</h3>
+          <p className="text-gray-300 mb-8 text-lg">
+            Ready to collaborate on the next digital frontier? Let's sync up and build something extraordinary
           </p>
           
           <div className="flex justify-center space-x-6">
             {[
-              { icon: Github, label: 'GitHub', href: '#' },
-              { icon: Twitter, label: 'Twitter', href: '#' },
-              { icon: Mail, label: 'Email', href: 'mailto:hello@example.com' },
+              { icon: Github, label: 'GitHub', href: '#', color: 'cyan' },
+              { icon: Twitter, label: 'Twitter', href: '#', color: 'pink' },
+              { icon: Mail, label: 'Email', href: 'mailto:hello@example.com', color: 'yellow' },
             ].map((social, index) => (
               <motion.a
                 key={social.label}
                 href={social.href}
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full flex items-center justify-center text-white hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+                className={`cyber-button w-14 h-14 rounded-full flex items-center justify-center text-white transition-all duration-300`}
               >
-                <social.icon className="w-5 h-5" />
+                <social.icon className="w-6 h-6" />
               </motion.a>
             ))}
           </div>
